@@ -1,4 +1,4 @@
-const parseNumbers = (input) => {
+const parseDelimiters = (input) => {
   let delimiter = /,|\n/;
   let numbersSection = input;
 
@@ -8,7 +8,11 @@ const parseNumbers = (input) => {
     delimiter = new RegExp(delimiterPart);
     numbersSection = input.substring(delimiterLineEnd + 1);
   }
+  return { delimiter, numbersSection }
+}
 
+const parseNumbers = (input) => {
+  const { delimiter, numbersSection } = parseDelimiters(input)
   const numberStrings = numbersSection
     .split(delimiter)
     .map(str => str.trim());
