@@ -1,6 +1,6 @@
 const parseNumbers = (input) => {
   const numberStrings = input
-    .split(',')
+    .split(/,|\n/)
     .map(str => str.trim());
   const numbers = numberStrings.map(str => parseInt(str));
   return numbers;
