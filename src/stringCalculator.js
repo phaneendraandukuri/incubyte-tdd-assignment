@@ -3,11 +3,8 @@ const add = function (input) {
     return 0;
   }
 
-  if (!input.includes(',')) {
-    return parseInt(input);
-  }
-
-  return 0;
+  const numbers = input.split(',').map(str => parseInt(str));
+  return numbers.reduce((sum, num) => sum + num, 0);
 }
 
 module.exports = add
