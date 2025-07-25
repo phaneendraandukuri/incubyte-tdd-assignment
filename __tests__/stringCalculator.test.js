@@ -1,4 +1,4 @@
-import { add } from '../src/stringCalculator';
+const add = require("../src/stringCalculator");
 
 describe('String Calculator', () => {
   test('should return 0 for empty string', () => {
