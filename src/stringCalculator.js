@@ -1,5 +1,7 @@
 const MAX_NUMBER = 1000;
 
+const escapeForRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 const parseDelimiters = (input) => {
   let delimiter = /,|\n/;
   let numbersSection = input;
@@ -12,7 +14,7 @@ const parseDelimiters = (input) => {
       delimiterPart = delimiterPart.slice(1, -1);
     }
 
-    const escapedDelimiter = delimiterPart.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const escapedDelimiter = escapeForRegex(delimiterPart);
     delimiter = new RegExp(escapedDelimiter);
     numbersSection = input.substring(delimiterLineEnd + 1);
   }
