@@ -1,11 +1,12 @@
-const parseNumbers = function (input) {
-  return input
+const parseNumbers = (input) => {
+  const numberStrings = input
     .split(',')
-    .map(str => str.trim())
-    .map(str => parseInt(str, 10));
+    .map(str => str.trim());
+  const numbers = numberStrings.map(str => parseInt(str));
+  return numbers;
 }
 
-const add = function (input) {
+const add = (input) => {
   if (input === '') {
     return 0;
   }
