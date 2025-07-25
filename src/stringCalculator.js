@@ -1,7 +1,16 @@
 const parseNumbers = (input) => {
-  const regex = /,|\n/
-  const numberStrings = input
-    .split(regex)
+  let delimiter = /,|\n/;
+  let numbersSection = input;
+
+  if (input.startsWith('//')) {
+    const delimiterLineEnd = input.indexOf('\n');
+    const delimiterPart = input.substring(2, delimiterLineEnd);
+    delimiter = new RegExp(delimiterPart);
+    numbersSection = input.substring(delimiterLineEnd + 1);
+  }
+
+  const numberStrings = numbersSection
+    .split(delimiter)
     .map(str => str.trim());
   const numbers = numberStrings.map(str => parseInt(str));
   return numbers;
