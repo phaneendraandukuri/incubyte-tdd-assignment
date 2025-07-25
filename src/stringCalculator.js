@@ -6,19 +6,26 @@ const parseDelimiters = (input) => {
 
   if (input.startsWith('//')) {
     const delimiterLineEnd = input.indexOf('\n');
-    const delimiterPart = input.substring(2, delimiterLineEnd);
-    delimiter = new RegExp(delimiterPart);
+    let delimiterPart = input.substring(2, delimiterLineEnd);
+
+    if (delimiterPart.startsWith('[') && delimiterPart.endsWith(']')) {
+      delimiterPart = delimiterPart.slice(1, -1);
+    }
+
+    const escapedDelimiter = delimiterPart.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    delimiter = new RegExp(escapedDelimiter);
     numbersSection = input.substring(delimiterLineEnd + 1);
   }
-  return { delimiter, numbersSection }
-}
 
-const parseNumbers = (input) => {
+  return { delimiter, numbersSection };
+};
+
+const extractNumbers = (input) => {
   const { delimiter, numbersSection } = parseDelimiters(input)
   const numberStrings = numbersSection
     .split(delimiter)
     .map(str => str.trim());
-  const numbers = numberStrings.map(str => parseInt(str));
+  const numbers = numberStrings.map(str => Number(str));
   return numbers;
 }
 
@@ -27,7 +34,7 @@ const add = (input) => {
     return 0;
   }
 
-  const numbers = parseNumbers(input);
+  const numbers = extractNumbers(input);
   const negatives = numbers.filter(n => n < 0);
   if (negatives.length > 0) {
     throw new Error(`Negative numbers not allowed: ${negatives.join(', ')}`);
