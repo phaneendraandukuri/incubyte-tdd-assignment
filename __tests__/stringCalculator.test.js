@@ -22,4 +22,8 @@ describe('String Calculator', () => {
   test('should throw an error if input contains negative numbers', () => {
     expect(() => add('1,-2,3,-5')).toThrow('Negative numbers not allowed: -2, -5');
   });
+  test('should ignore numbers greater than 1000', () => {
+    expect(add('2,1001,6')).toBe(8);
+  });
+
 });
