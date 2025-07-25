@@ -1,3 +1,5 @@
+const MAX_NUMBER = 1000;
+
 const parseDelimiters = (input) => {
   let delimiter = /,|\n/;
   let numbersSection = input;
@@ -30,7 +32,7 @@ const add = (input) => {
   if (negatives.length > 0) {
     throw new Error(`Negative numbers not allowed: ${negatives.join(', ')}`);
   }
-  const validNumbers = numbers.filter(n => n <= 1000);
+  const validNumbers = numbers.filter(n => n <= MAX_NUMBER);
 
   return validNumbers.reduce((sum, num) => sum + num, 0);
 }
