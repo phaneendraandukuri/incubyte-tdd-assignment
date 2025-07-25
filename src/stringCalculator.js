@@ -30,7 +30,9 @@ const add = (input) => {
   if (negatives.length > 0) {
     throw new Error(`Negative numbers not allowed: ${negatives.join(', ')}`);
   }
-  return numbers.reduce((sum, num) => sum + num, 0);
+  const validNumbers = numbers.filter(n => n <= 1000);
+
+  return validNumbers.reduce((sum, num) => sum + num, 0);
 }
 
 module.exports = add
